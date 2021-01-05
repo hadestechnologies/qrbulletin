@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello Adonis</title>
+  {{ style('style') }}
+</head>
+<body>
+  <section>
+    <div>
+      <form method="post" action="/post">
+        <label for="board">First name:</label><br>
+        <input type="text" id="board" name="board"><br>
+        <label for="post">Last name:</label><br>
+        <textarea name="post"></textarea><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </section>
+</body>
+</html>
