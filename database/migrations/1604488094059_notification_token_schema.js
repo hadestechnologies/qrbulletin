@@ -9,7 +9,7 @@ class NotificationTokenSchema extends Schema {
       table.increments()
       table.timestamps()
       table.string('identity', 64).notNullable().unique()
-      table.string('token', 64).notNullable().unique()
+      table.string('token', 64).notNullable()
       table.string('lang', 2).notNullable()
     })
   }
