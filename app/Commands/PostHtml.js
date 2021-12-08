@@ -2,8 +2,10 @@
 
 const { Command } = require('@adonisjs/ace')
 
-const Broad = use('App/Models/Board')
-const Post = use('App/Models/Post')
+const Broad = use('App/Models/Boards')
+const Post = use('App/Models/Posts')
+
+const sha256 = require('sha256')
 
 class PostHtml extends Command {
   static get signature () {
@@ -21,17 +23,19 @@ class PostHtml extends Command {
         id = Buffer.concat([Buffer.alloc(1), id])
     }
 
+    id = Buffer.from(sha256(sha256(id)), 'hex')
+
     let html = Buffer.from(args.html)
 
     let segment_descriptor = Buffer.alloc(5)
     segment_descriptor[0] = 2 // HTML
-    segment_descriptor.writeInt16LE(16)
-    segment_descriptor.writeInt16LE(html.length)
+    segment_descriptor.writeInt16LE(16, 1)
+    segment_descriptor.writeInt16LE(html.length, 3)
 
     let segement_descriptor_length = Buffer.alloc(1)
     segement_descriptor_length[0] = 5
 
-    let message = Buffer.concat([segement_descriptor_length, segment_descriptor, html])
+    let message = Buffer.concat([segement_descriptor_length, segment_descriptor, id, html])
 
     let board = await Broad.findBy('name', args.board)
     if (board) {
