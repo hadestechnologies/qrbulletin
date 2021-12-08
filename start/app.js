@@ -56,6 +56,7 @@ const aliases = {}
 |
 */
 const commands = [
+  'App/Commands/PostHtml',
 	'App/Commands/SendNotification'
 ]
 
