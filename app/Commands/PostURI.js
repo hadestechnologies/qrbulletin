@@ -30,7 +30,7 @@ class PostHtml extends Command {
     let segment_descriptor = Buffer.alloc(5)
     segment_descriptor[0] = 3 // URI
     segment_descriptor.writeInt16LE(16, 1)
-    segment_descriptor.writeInt16LE(html.length, 3)
+    segment_descriptor.writeInt16LE(uri.length, 3)
 
     let segement_descriptor_length = Buffer.alloc(1)
     segement_descriptor_length[0] = 5
